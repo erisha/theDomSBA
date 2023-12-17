@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const taskInput = document.getElementById('taskInput');
     const toDoForm = document.getElementById('toDoForm');
     const taskList = document.getElementById('taskList');
-    const container = document.querySelector('#app');
+    const container = document.querySelector('#container');
 
     //Event listeners
     toDoForm.addEventListener('submit', addTask);
