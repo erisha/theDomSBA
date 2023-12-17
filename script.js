@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Event listeners
     toDoForm.addEventListener('submit', addTask);
+    taskList.addEventListener('click', removeTask);
 
     // function to add a new task
     function addTask(event){
