@@ -40,6 +40,7 @@ background-size: 1800% 1800%;
     padding: 40px;
     background-color: rgba(253, 249, 249, 0.446);
     box-shadow: 10px 10px 5px rgba(128, 128, 128, 0.526);
+    border-radius: 8px ;
 }
 h1 {
     /* color: white;
@@ -67,4 +68,5 @@ h1 {
     
 
 }
+
 
