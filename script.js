@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // cache elements
     const taskInput = document.getElementById('taskInput');
     const toDoForm = document.getElementById('toDoForm');
     const taskList = document.getElementById('taskList');
@@ -6,70 +7,55 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Event listeners
     toDoForm.addEventListener('submit', addTask);
-    taskList.addEventListener('click', removeTask);
+   
 
     
 
     // function to add a new task
-    function addTask(event){
+    function addTask (event){
         event.preventDefault();
 
         const taskTxt = taskInput.value;
 
-        //create task element
+        if(taskTxt !== '') {
+            // create new task element
+            const newTask = document.createElement('li');
+            const deleteBtn = document.createElement('button');
 
-        const taskElement = document.createElement('li');
-        taskElement.className = 'task';
-        taskElement.innerHTML = `
-            <span>${taskTxt}</span>
-            <button> Delete</button>
-        `;
+            newTask.textContent = taskTxt;
+            deleteBtn.textContent = 'Delete';
 
-        // add new elements to DOM using appendChild
-        taskList.appendChild(taskElement);
+            // event listener completed task 
+            newTask.addEventListener('click', toggleTask);
 
-        // clear input field
-        taskInput.value = '';
-  
-    }
+            // event listener delete button 
+            deleteBtn.addEventListener('click', deleteTask);
 
-    // remove a task
-    function removeTask(event) {
-        if (event.target.tagName === 'BUTTON'){
-            const taskElement = event.target.closest('.task');
+            //append elements
+            newTask.appendChild(deleteBtn);
+            taskList.appendChild(newTask);
 
-            taskList.removeChild(taskElement);
+            //clear input
+            taskInput.value = '';
+
         }
+
     }
 
-    // documentFragment creates list of tasks
-    const fragment = document.createDocumentFragment();
-    for (let i = 0; i < 10; i++) {
-        const listItem = document.createElement('li');
-        listItem.textContent = `Task # ${i + 1}`;
-        fragment.appendChild(listItem);
-    }
-    taskList.appendChild(fragment);
 
-// user interactions
-app.addEventListener('mouseover' , () => {
-    app.innerHTML = '<h1> Mover Over Event!</h1>';
-});
+function toggleTask(){
+    this.classList.toggle('completed')
+}
 
-taskList.addEventListener('click', (event) => {
-    if (event.target.tagName === 'SPAN'){
-        event.target.style.textDecoration = 'line-through';
-    }
-});
 
-app.addEventListener('mouseout', () => {
-    app.setAttribute('style', 'background-color: lightblue;');
+// delete task 
+function deleteTask(){
+    this.parentNode.remove();
+}
+
 });
 
 // BOM properties/methods
 
 console.log('Window inner width:', window.innerWidth);
 console.log('Document URL:', document.URL);
-
-
-});
