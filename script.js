@@ -31,13 +31,26 @@ document.addEventListener('DOMContentLoaded', () => {
             // event listener delete button 
             deleteBtn.addEventListener('click', deleteTask);
 
-            //append elements
+            //append delete btn 
             newTask.appendChild(deleteBtn);
-            taskList.appendChild(newTask);
 
+            
+            
+            //new btn for strikethrough 
+            //****(removed this. Don't need this button. Just click the completed task)
+            
+            // const togglebtn = document.createElement('button');
+            // togglebtn.textContent = 'Done';
+            // togglebtn.addEventListener('click', toggleTask);
+            // newTask.appendChild(togglebtn);
+            
+
+            // append newTask to taskList
+            taskList.appendChild(newTask);
+            
+            
             //clear input
             taskInput.value = '';
-
         }
 
     }
@@ -53,8 +66,20 @@ function deleteTask(){
     this.parentNode.remove();
 }
 
+
+//event listener for strikthrough button
+taskList.addEventListener('click', function (event){
+    const target = event.target;
+    
+    // check if the clicked element is a button inside a task
+    if(target.tagName === 'BUTTON' && target.parentNode.tagName === 'LI') {
+        toggleTask.call(target.parentNode); // toggle strikethrough
+    }
+    
+    
 });
 
+});
 // BOM properties/methods
 
 console.log('Window inner width:', window.innerWidth);
